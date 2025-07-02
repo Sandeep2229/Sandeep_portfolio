@@ -36,17 +36,17 @@ const sampleMediaContent: MediaContentCollection = {
       conclusion: 'The ScrollExpandMedia component provides a unique way to engage users with your content through interactive scrolling.',
     },
   },
-  image: {
-    src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1280&auto=format&fit=crop',
-    background: 'https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?q=80&w=1920&auto=format&fit=crop',
-    title: 'Sai Sandeep Mamidala', 
-    date: 'AI Innovation',
-    scrollToExpand: 'Scroll to Expand',
-    about: {
-      overview: 'This is a demonstration of the ScrollExpandMedia component with an image. The same smooth expansion effect works beautifully with static images.',
-      conclusion: 'The ScrollExpandMedia component works equally well with images and videos, providing flexibility for different content types.',
-    },
-  },
+  // image: {
+  //   src: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1280&auto=format&fit=crop',
+  //   background: 'https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?q=80&w=1920&auto=format&fit=crop',
+  //   title: 'Sai Sandeep Mamidala', 
+  //   date: 'AI Innovation',
+  //   scrollToExpand: 'Scroll to Expand',
+  //   about: {
+  //     overview: 'This is a demonstration of the ScrollExpandMedia component with an image. The same smooth expansion effect works beautifully with static images.',
+  //     conclusion: 'The ScrollExpandMedia component works equally well with images and videos, providing flexibility for different content types.',
+  //   },
+  // },
 };
 
 const MediaContent = ({ mediaType }: { mediaType: 'video' | 'image' }) => {
@@ -88,7 +88,7 @@ const ScrollExpansionDemo = () => {
         >
           Video
         </button>
-        <button
+        {/* <button
           onClick={() => setMediaType('image')}
           className={`px-4 py-2 rounded-lg ${
             mediaType === 'image'
@@ -97,7 +97,7 @@ const ScrollExpansionDemo = () => {
           }`}
         >
           Image
-        </button>
+        </button> */}
       </div>
 
       <ScrollExpandMedia
@@ -117,3 +117,4 @@ const ScrollExpansionDemo = () => {
 };
 
 export default ScrollExpansionDemo;
+
