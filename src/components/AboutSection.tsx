@@ -28,7 +28,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
             <div className="relative">
               {/* Animated background rings */}
               <motion.div
-                className="absolute inset-0 w-80 h-80 rounded-full bg-gradient-to-br from-blue-400/20 via-purple-500/20 to-cyan-400/20 backdrop-blur-sm"
+                className="absolute inset-0 w-96 h-96 rounded-full bg-gradient-to-br from-blue-400/20 via-purple-500/20 to-cyan-400/20 backdrop-blur-sm"
                 animate={{
                   rotate: [0, 360],
                   scale: [1, 1.05, 1],
@@ -52,12 +52,12 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
               
               {/* Profile Image */}
               <motion.div
-                className="relative w-72 h-72 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl m-4"
+                className="relative w-96 h-96 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl m-4"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               >
                 <img
-                  src="/lovable-uploads/e4cd9499-430c-476c-8c93-7a679fb1d909.png"
+                  src="/lovable-uploads/profilepic.png"
                   alt="Sai Sandeep Mamidala"
                   className="w-full h-full object-cover object-center"
                 />
