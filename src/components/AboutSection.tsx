@@ -123,3 +123,4 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
 };
 
 export default AboutSection;
+//
