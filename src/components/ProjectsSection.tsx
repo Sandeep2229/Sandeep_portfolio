@@ -3,12 +3,14 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
 
 interface ProjectsSectionProps {
   darkMode: boolean;
 }
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
+  const { toast } = useToast();
   const projects = [
     {
       title: 'Care Companion',
@@ -76,15 +78,27 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
             >
-              <Card className={`h-full transition-all duration-300 hover:shadow-2xl ${darkMode
-                  ? 'bg-white/5 border-white/10 hover:border-white/20 hover:shadow-blue-500/10'
-                  : 'bg-black/5 border-black/10 hover:border-black/20 hover:shadow-blue-500/10'
-                }`}>
+              <Card 
+                className={`h-full transition-all duration-300 hover:shadow-2xl cursor-pointer ${
+                  darkMode
+                    ? 'bg-white/5 border-white/10 hover:border-white/20 hover:shadow-blue-500/10 text-white'
+                    : 'bg-white/90 border-gray-200/50 hover:border-gray-300/50 hover:shadow-blue-500/10 text-gray-900'
+                }`}
+                onClick={() => {
+                  if (project.github && project.github !== '#') {
+                    window.open(project.github, '_blank', 'noopener,noreferrer');
+                  }
+                }}
+              >
                 <CardHeader>
-                  <CardTitle className="text-xl font-semibold mb-2">
+                  <CardTitle className={`text-xl font-semibold mb-2 ${
+                    darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {project.title}
                   </CardTitle>
-                  <p className="opacity-80 text-sm leading-relaxed">
+                  <p className={`opacity-80 text-sm leading-relaxed ${
+                    darkMode ? 'text-white/80' : 'text-gray-700'
+                  }`}>
                     {project.description}
                   </p>
                 </CardHeader>
@@ -102,28 +116,68 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-3">
-                    <Button
-                      variant="outline"
-                      size="sm"
+                  <div className="flex gap-3" onClick={(e) => e.stopPropagation()}>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       className="flex-1"
-                      asChild
                     >
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4 mr-2" />
-                        Code
-                      </a>
-                    </Button>
-                    <Button
-                      size="sm"
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-                      asChild
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full transition-all duration-300 group"
+                        asChild
+                      >
+                        <a 
+                          href={project.github} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (project.github === '#') {
+                              e.preventDefault();
+                            }
+                          }}
+                        >
+                          <Github className="h-4 w-4 mr-2 transition-transform duration-300 group-hover:rotate-12" />
+                          Code
+                        </a>
+                      </Button>
+                    </motion.div>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex-1"
                     >
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Demo
-                      </a>
-                    </Button>
+                      <Button
+                        size="sm"
+                        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 group relative overflow-hidden"
+                        asChild={project.demo !== '#'}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (project.demo === '#') {
+                            e.preventDefault();
+                            toast({
+                              title: "Demo not available",
+                              description: `${project.title} demo is currently in development. Check back soon!`,
+                            });
+                          }
+                        }}
+                        disabled={project.demo === '#'}
+                      >
+                        {project.demo !== '#' ? (
+                          <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="h-4 w-4 mr-2 transition-transform duration-300 group-hover:rotate-12" />
+                            Demo
+                          </a>
+                        ) : (
+                          <span>
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Demo
+                          </span>
+                        )}
+                      </Button>
+                    </motion.div>
                   </div>
                 </CardContent>
               </Card>

@@ -54,37 +54,77 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
           className="mb-12"
         >
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Download className="mr-2 h-5 w-5" />
-              Download Resume
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className={`px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105 ${
-                darkMode 
-                  ? 'border-white/20 hover:border-white/40 hover:bg-white/5' 
-                  : 'border-black/20 hover:border-black/40 hover:bg-black/5'
-              }`}
+              <Button
+                size="lg"
+                onClick={() => {
+                  // Create a temporary link to download resume
+                  const link = document.createElement('a');
+                  link.href = '/resume.pdf'; // You'll need to add your resume file
+                  link.download = 'Sai_Sandeep_Mamidala_Resume.pdf';
+                  link.click();
+                }}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 px-8 py-3 text-lg font-medium transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/25 group relative overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center">
+                  <Download className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:translate-y-[-2px]" />
+                  Download Resume
+                </span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={false}
+                />
+              </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <ExternalLink className="mr-2 h-5 w-5" />
-              Explore Projects
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className={`px-8 py-3 text-lg font-medium transition-all duration-300 hover:scale-105 ${
-                darkMode 
-                  ? 'border-white/20 hover:border-white/40 hover:bg-white/5' 
-                  : 'border-black/20 hover:border-black/40 hover:bg-black/5'
-              }`}
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => {
+                  const element = document.getElementById('projects');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className={`px-8 py-3 text-lg font-medium transition-all duration-300 group ${
+                  darkMode 
+                    ? 'border-white/20 hover:border-white/40 hover:bg-white/5 hover:shadow-lg hover:shadow-white/10' 
+                    : 'border-black/20 hover:border-black/40 hover:bg-black/5 hover:shadow-lg hover:shadow-black/10'
+                }`}
+              >
+                <ExternalLink className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                Explore Projects
+              </Button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Mail className="mr-2 h-5 w-5" />
-              Contact
-            </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => {
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className={`px-8 py-3 text-lg font-medium transition-all duration-300 group ${
+                  darkMode 
+                    ? 'border-white/20 hover:border-white/40 hover:bg-white/5 hover:shadow-lg hover:shadow-white/10' 
+                    : 'border-black/20 hover:border-black/40 hover:bg-black/5 hover:shadow-lg hover:shadow-black/10'
+                }`}
+              >
+                <Mail className="mr-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                Contact
+              </Button>
+            </motion.div>
           </div>
         </motion.div>
 
@@ -95,22 +135,25 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode }) => {
         >
           <div className="flex justify-center space-x-8">
             {[
-              { Icon: Github, href: '#', label: 'GitHub' },
-              { Icon: Linkedin, href: '#', label: 'LinkedIn' },
-              { Icon: Mail, href: '#', label: 'Email' },
+              { Icon: Github, href: 'https://github.com/Sandeep2229', label: 'GitHub' },
+              { Icon: Linkedin, href: 'https://www.linkedin.com/in/sai-sandeep-mamidala/', label: 'LinkedIn' },
+              { Icon: Mail, href: 'mailto:mss9430@nyu.edu', label: 'Email' },
             ].map(({ Icon, href, label }) => (
               <motion.a
                 key={label}
                 href={href}
-                className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className={`p-3 rounded-full transition-all duration-300 group relative ${
                   darkMode 
                     ? 'hover:bg-white/10 hover:shadow-lg hover:shadow-white/20' 
                     : 'hover:bg-black/10 hover:shadow-lg hover:shadow-black/20'
                 }`}
-                whileHover={{ y: -2 }}
+                whileHover={{ y: -2, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label={label}
               >
-                <Icon className="h-6 w-6" />
+                <Icon className="h-6 w-6 transition-transform duration-300 group-hover:rotate-6" />
               </motion.a>
             ))}
           </div>

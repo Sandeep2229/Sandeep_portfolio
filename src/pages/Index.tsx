@@ -221,7 +221,7 @@ const sampleMediaContent = {
   },
 };
 
-const HeroContent = ({ mediaType }: { mediaType: 'video' | 'image' }) => {
+const HeroContent = ({ mediaType, darkMode }: { mediaType: 'video' | 'image'; darkMode: boolean }) => {
   return (
     <motion.div
       className='max-w-5xl mx-auto text-center px-6'
@@ -230,7 +230,9 @@ const HeroContent = ({ mediaType }: { mediaType: 'video' | 'image' }) => {
       transition={{ duration: 1.2, ease: "easeOut" }}
     >
       <motion.h1
-        className='text-5xl md:text-7xl font-light mb-8 text-white tracking-wide'
+        className={`text-5xl md:text-7xl font-light mb-8 tracking-wide ${
+          darkMode ? 'text-white' : 'text-gray-900'
+        }`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.3 }}
@@ -239,14 +241,18 @@ const HeroContent = ({ mediaType }: { mediaType: 'video' | 'image' }) => {
       </motion.h1>
 
       <motion.div
-        className='w-24 h-px bg-white/60 mx-auto mb-8'
+        className={`w-24 h-px mx-auto mb-8 ${
+          darkMode ? 'bg-white/60' : 'bg-gray-900/60'
+        }`}
         initial={{ width: 0 }}
         animate={{ width: 96 }}
         transition={{ duration: 1, delay: 0.6 }}
       />
 
       <motion.p
-        className='text-xl md:text-2xl mb-12 text-white/90 leading-relaxed font-light max-w-4xl mx-auto'
+        className={`text-xl md:text-2xl mb-12 leading-relaxed font-light max-w-4xl mx-auto ${
+          darkMode ? 'text-white/90' : 'text-gray-900/90'
+        }`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.8 }}
@@ -256,7 +262,9 @@ const HeroContent = ({ mediaType }: { mediaType: 'video' | 'image' }) => {
       </motion.p>
 
       <motion.p
-        className='text-lg text-white/70 leading-relaxed font-light max-w-3xl mx-auto'
+        className={`text-lg leading-relaxed font-light max-w-3xl mx-auto ${
+          darkMode ? 'text-white/70' : 'text-gray-900/70'
+        }`}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
@@ -331,19 +339,25 @@ const Index = () => {
             scrollToExpand={currentMedia.scrollToExpand}
             textBlend
           >
-            <HeroContent mediaType={mediaType} />
+            <HeroContent mediaType={mediaType} darkMode={darkMode} />
           </ScrollExpandMedia>
         </section>
 
         <motion.section
           id="about"
-          className="bg-[url('/lovable-uploads/blue.jpg')] bg-cover bg-center bg-no-repeat"
+          className="bg-[url('/lovable-uploads/blue.jpg')] bg-cover bg-center bg-no-repeat relative"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
         >
-          <AboutSection darkMode={darkMode} />
+          {/* Overlay for better text visibility */}
+          <div className={`absolute inset-0 z-0 ${
+            darkMode ? 'bg-black/40' : 'bg-white/50'
+          }`}></div>
+          <div className={`relative z-10 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            <AboutSection darkMode={darkMode} />
+          </div>
         </motion.section>
 
         <motion.section
@@ -355,10 +369,10 @@ const Index = () => {
           viewport={{ once: true }}
         >
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
+          <div className={`absolute inset-0 z-0 ${darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-40'}`}></div>
 
           {/* Project content */}
-          <div className="relative z-10">
+          <div className="relative z-10 text-white">
             <ProjectsSection darkMode={darkMode} />
           </div>
         </motion.section>
@@ -372,10 +386,10 @@ const Index = () => {
           viewport={{ once: true }}
         >
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-60 z-0" />
+          <div className={`absolute inset-0 z-0 ${darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-40'}`} />
 
           {/* Content above overlay */}
-          <div className="relative z-10">
+          <div className="relative z-10 text-white">
             <ExperienceSection darkMode={darkMode} />
           </div>
         </motion.section>
@@ -390,10 +404,10 @@ const Index = () => {
           viewport={{ once: true }}
         >
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-60 z-0" />
+          <div className={`absolute inset-0 z-0 ${darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-40'}`} />
 
           {/* Actual content on top of overlay */}
-          <div className="relative z-10">
+          <div className="relative z-10 text-white">
             <TechStackSection darkMode={darkMode} />
           </div>
         </motion.section>
@@ -407,11 +421,11 @@ const Index = () => {
           viewport={{ once: true }}
         >
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
+          <div className={`absolute inset-0 z-0 ${darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-40'}`}></div>
 
           {/* Content on top */}
-          <div className="relative z-10">
-            <ContactSection darkMode={true} />
+          <div className="relative z-10 text-white">
+            <ContactSection darkMode={darkMode} />
           </div>
         </motion.section>
 

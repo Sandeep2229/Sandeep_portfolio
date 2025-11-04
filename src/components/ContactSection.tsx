@@ -24,16 +24,37 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    toast({
-      title: "Message sent successfully!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
+      const data = await response.json();
 
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+      if (response.ok && data.success) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+          variant: "default",
+        });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error(data.error || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast({
+        title: "Failed to send message",
+        description: error instanceof Error ? error.message : "Please try again later or reach out directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -127,8 +148,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
                   required
                   className={`transition-all duration-300 focus:scale-105 ${
                     darkMode 
-                      ? 'bg-white/10 border-white/20 focus:border-blue-400' 
-                      : 'bg-black/10 border-black/20 focus:border-blue-600'
+                      ? 'bg-white/10 border-white/20 focus:border-blue-400 text-white placeholder:text-white/70' 
+                      : 'bg-white/90 border-gray-300 focus:border-blue-600 text-gray-900 placeholder:text-gray-500'
                   }`}
                 />
               </motion.div>
@@ -148,8 +169,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
                   required
                   className={`transition-all duration-300 focus:scale-105 ${
                     darkMode 
-                      ? 'bg-white/10 border-white/20 focus:border-blue-400' 
-                      : 'bg-black/10 border-black/20 focus:border-blue-600'
+                      ? 'bg-white/10 border-white/20 focus:border-blue-400 text-white placeholder:text-white/70' 
+                      : 'bg-white/90 border-gray-300 focus:border-blue-600 text-gray-900 placeholder:text-gray-500'
                   }`}
                 />
               </motion.div>
@@ -169,8 +190,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
                   rows={5}
                   className={`transition-all duration-300 focus:scale-105 resize-none ${
                     darkMode 
-                      ? 'bg-white/10 border-white/20 focus:border-blue-400' 
-                      : 'bg-black/10 border-black/20 focus:border-blue-600'
+                      ? 'bg-white/10 border-white/20 focus:border-blue-400 text-white placeholder:text-white/70' 
+                      : 'bg-white/90 border-gray-300 focus:border-blue-600 text-gray-900 placeholder:text-gray-500'
                   }`}
                 />
               </motion.div>
@@ -181,13 +202,40 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 hover:scale-105"
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </Button>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 group relative overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center justify-center">
+                      {isSubmitting ? (
+                        <>
+                          <motion.div
+                            className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full mr-2"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Mail className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                          Send Message
+                        </>
+                      )}
+                    </span>
+                    {!isSubmitting && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        initial={false}
+                      />
+                    )}
+                  </Button>
+                </motion.div>
               </motion.div>
             </div>
           </motion.form>

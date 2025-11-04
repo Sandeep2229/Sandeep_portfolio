@@ -11,7 +11,11 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ darkMode, onToggle }) => {
   return (
     <motion.button
       onClick={() => onToggle(!darkMode)}
-      className="relative w-16 h-8 rounded-full backdrop-blur-md bg-white/10 border border-white/20 focus:outline-none"
+      className={`relative w-16 h-8 rounded-full backdrop-blur-md border focus:outline-none transition-colors duration-300 ${
+        darkMode 
+          ? 'bg-white/10 border-white/20' 
+          : 'bg-black/10 border-black/20'
+      }`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, y: -20 }}
@@ -31,8 +35,8 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ darkMode, onToggle }) => {
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
       <div className="absolute inset-0 flex items-center justify-between px-2 text-xs">
-        <span className={darkMode ? 'text-white/60' : 'text-white'}>🌙</span>
-        <span className={!darkMode ? 'text-white/60' : 'text-white'}>☀️</span>
+        <span className={darkMode ? 'opacity-60' : 'opacity-100'}>🌙</span>
+        <span className={!darkMode ? 'opacity-60' : 'opacity-100'}>☀️</span>
       </div>
     </motion.button>
   );

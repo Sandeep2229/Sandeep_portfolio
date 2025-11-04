@@ -139,8 +139,8 @@ const PortfolioChatbot: React.FC<PortfolioChatbotProps> = ({ darkMode }) => {
                     <Bot className="h-4 w-4 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-sm">Sai's AI Assistant</h3>
-                    <p className="text-xs opacity-60">Online</p>
+                    <h3 className={`font-semibold text-sm ${darkMode ? 'text-white' : 'text-gray-900'}`}>Sai's AI Assistant</h3>
+                    <p className={`text-xs opacity-60 ${darkMode ? 'text-white' : 'text-gray-700'}`}>Online</p>
                   </div>
                 </div>
               </div>
@@ -167,12 +167,10 @@ const PortfolioChatbot: React.FC<PortfolioChatbotProps> = ({ darkMode }) => {
                         </div>
                         <div className={`px-3 py-2 rounded-lg text-sm ${
                           message.isUser
-                            ? darkMode 
-                              ? 'bg-blue-600 text-white' 
-                              : 'bg-blue-500 text-white'
+                            ? 'bg-blue-600 text-white'
                             : darkMode
                               ? 'bg-white/10 text-white'
-                              : 'bg-black/10 text-black'
+                              : 'bg-gray-100 text-gray-900'
                         }`}>
                           {message.text}
                         </div>
@@ -191,9 +189,11 @@ const PortfolioChatbot: React.FC<PortfolioChatbotProps> = ({ darkMode }) => {
                           <Bot className="h-3 w-3 text-white" />
                         </div>
                         <div className={`px-3 py-2 rounded-lg ${
-                          darkMode ? 'bg-white/10' : 'bg-black/10'
+                          darkMode ? 'bg-white/10' : 'bg-gray-100'
                         }`}>
-                          <div className="flex space-x-1">
+                          <div className={`flex space-x-1 ${
+                            darkMode ? 'text-white' : 'text-gray-900'
+                          }`}>
                             <div className="w-2 h-2 bg-current rounded-full animate-bounce"></div>
                             <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                             <div className="w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
@@ -219,7 +219,7 @@ const PortfolioChatbot: React.FC<PortfolioChatbotProps> = ({ darkMode }) => {
                     className={`flex-1 ${
                       darkMode 
                         ? 'bg-white/10 border-white/20 text-white placeholder-white/50' 
-                        : 'bg-black/5 border-black/20'
+                        : 'bg-gray-100 border-gray-300 text-gray-900 placeholder-gray-500'
                     }`}
                   />
                   <Button
