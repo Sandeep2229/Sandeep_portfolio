@@ -20,6 +20,30 @@ A modern, interactive portfolio website showcasing projects, experience, and ski
 - Node.js 18+ and npm
 - (Optional) For email functionality: Email service credentials
 
+## Deployment
+
+### Vercel Deployment
+
+This project is configured for easy deployment on Vercel:
+
+1. **Connect your GitHub repository to Vercel:**
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repository
+   - Vercel will automatically detect the Vite framework
+
+2. **Configure Environment Variables (Optional):**
+   - In Vercel project settings, add these environment variables if you want email functionality:
+     - `EMAIL_SERVICE` (e.g., "gmail")
+     - `EMAIL_USER` (your email address)
+     - `EMAIL_PASS` (your app password)
+     - `CONTACT_EMAIL` (where to send contact form submissions)
+
+3. **Deploy:**
+   - Vercel will automatically build and deploy on every push to main
+   - The API endpoints (`/api/contact`, `/api/health`) will work as serverless functions
+
+**Note:** The contact form will work even without email configuration - submissions will be logged to Vercel's function logs.
+
 ### Installation
 
 1. Clone the repository:
