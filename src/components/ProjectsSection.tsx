@@ -13,39 +13,49 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
   const { toast } = useToast();
   const projects = [
     {
-      title: 'Care Companion',
-      description: 'AI-powered webapp for medical teams to streamline patient care workflows and improve communication.',
-      tech: ['Python', 'FastAPI', 'React', 'PostgreSQL', 'AWS'],
-      github: 'https://github.com/Sandeep2229/care-companion',
+      title: 'CIFAR-10 Image Classification with Custom ResNet',
+      description: 'Developed a deep learning model for CIFAR-10 image classification with under 5M parameters and over 80% test accuracy. Designed a custom ResNet with progressive channel expansion, achieving 90.24% accuracy at just 2.76M parameters.',
+      tech: ['Python', 'PyTorch', 'Deep Learning', 'CNN', 'ResNet'],
+      github: '#',
       demo: '#',
+      date: 'Apr 2025',
+      location: 'New York, United States',
     },
     {
-      title: 'DICOM Viewer Web App',
-      description: 'A web application that allows users to upload and view DICOM medical images directly in the browser. Built with React and the Cornerstone.js suite, it displays both the image and important metadata from the uploaded DICOM file.',
-      tech: ['Python', 'FastAPI', 'React', 'PostgreSQL', 'AWS'],
-      github: 'https://github.com/Sandeep2229/dicom-viewer-app',
+      title: 'Care Companion Webapp',
+      description: 'Full-stack AI platform for medical teams. Developed role-specific dashboards and collaborative review workflows, improving diagnostic clarity by 45%. Integrated AI diagnostics and generated patient-friendly summaries, reducing jargon by 60%. Enabled version-controlled discharge reports and async inference pipelines, boosting traceability by 50%.',
+      tech: ['Python', 'FastAPI', 'React', 'PostgreSQL', 'AWS', 'AI/ML'],
+      github: 'https://github.com/Sandeep2229/care-companion',
       demo: '#',
+      date: 'Mar 2025',
+      location: 'New York, United States',
     },
     {
       title: 'Graph-Aware Task Manager',
-      description: 'Collaborative development workflow tool with intelligent task dependency mapping and team coordination.',
-      tech: ['Node.js', 'GraphQL', 'MongoDB', 'React', 'Docker'],
+      description: 'Real-Time Developer Tool for Collaborative Engineering Workflows. For platforms using Next.js, TypeScript, Tailwind, shadcn/ui, boosting review throughput by 35%. Optimized build pipeline and layout shifts, decreasing load time by 30% and improving Lighthouse score. Implemented role-based routing and modular architecture, reducing code duplication by 40%.',
+      tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'GraphQL'],
       github: 'https://github.com/Sandeep2229/tiny-archives-task-manager',
       demo: '#',
+      date: 'Mar 2025',
+      location: 'New York, United States',
+    },
+    {
+      title: 'Traffic Monitoring and Vehicle Detection Algorithm',
+      description: 'Thesis Project: Developed real-time vehicle detection algorithm to monitor toll plazas, increasing detection accuracy by 18%. Applied ML models (ANN, AdaBoost, SVM) to classify vehicle types with 95% accuracy.',
+      tech: ['Python', 'Machine Learning', 'Computer Vision', 'OpenCV', 'ANN', 'AdaBoost', 'SVM'],
+      github: '#',
+      demo: '#',
+      date: 'Feb 2023',
+      location: 'Chennai, India',
     },
     {
       title: 'BoneFractureDetection',
       description: 'This project focuses on building a robust deep learning model to detect bone fractures from X-ray images and explores classification techniques using convolutional neural networks (CNNs) and evaluates model performance across various metrics.',
-      tech: ['Python', 'Pandas', 'Plotly', 'Streamlit', 'PostgreSQL'],
+      tech: ['Python', 'PyTorch', 'CNN', 'Medical Imaging', 'Streamlit'],
       github: 'https://github.com/Sandeep2229/BoneFractureDetection',
       demo: '#',
-    },
-    {
-      title: 'Public Health Data Analysis',
-      description: 'Comprehensive Python dashboards for analyzing public health trends and generating actionable insights. (Currently in progress)',
-      tech: ['Python', 'Pandas', 'Plotly', 'Streamlit', 'PostgreSQL'],
-      github: '#',
-      demo: '#',
+      date: '2023',
+      location: 'Singapore',
     },
   ];
 
@@ -91,11 +101,27 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
                 }}
               >
                 <CardHeader>
-                  <CardTitle className={`text-xl font-semibold mb-2 ${
-                    darkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
-                    {project.title}
-                  </CardTitle>
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-2 gap-2">
+                    <CardTitle className={`text-xl font-semibold ${
+                      darkMode ? 'text-white' : 'text-gray-900'
+                    }`}>
+                      {project.title}
+                    </CardTitle>
+                    {project.date && (
+                      <span className={`text-xs opacity-60 whitespace-nowrap ${
+                        darkMode ? 'text-white/60' : 'text-gray-600'
+                      }`}>
+                        {project.date}
+                      </span>
+                    )}
+                  </div>
+                  {project.location && (
+                    <p className={`text-xs opacity-60 mb-2 ${
+                      darkMode ? 'text-white/60' : 'text-gray-600'
+                    }`}>
+                      {project.location}
+                    </p>
+                  )}
                   <p className={`opacity-80 text-sm leading-relaxed ${
                     darkMode ? 'text-white/80' : 'text-gray-700'
                   }`}>

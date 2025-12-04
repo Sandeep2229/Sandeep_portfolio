@@ -41,8 +41,6 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
           viewport={{ once: true }}
         >
           <p>© {currentYear} Sai Sandeep Mamidala. All rights reserved.</p>
-          <p>Built with React, Three.js, and lots of ☕</p>
-          
         </motion.div>
 
         <motion.div

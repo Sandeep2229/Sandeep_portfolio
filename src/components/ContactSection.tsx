@@ -33,12 +33,53 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      // Check if response is ok and has content
+      if (!response.ok) {
+        // Try to get error message from response
+        const text = await response.text();
+        let errorMessage = 'Failed to send message';
+        
+        if (text) {
+          try {
+            const errorData = JSON.parse(text);
+            errorMessage = errorData.error || errorMessage;
+          } catch {
+            errorMessage = text || `Server error: ${response.status}`;
+          }
+        } else {
+          errorMessage = `Server error: ${response.status}`;
+        }
+        
+        throw new Error(errorMessage);
+      }
 
-      if (response.ok && data.success) {
+      // Check if response has content before parsing
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        // If backend is not running, show helpful message
+        if (response.status === 404 || response.status === 0) {
+          throw new Error('Backend server is not running. Please contact directly via email: mss9430@nyu.edu');
+        }
+        throw new Error('Invalid response from server');
+      }
+
+      const text = await response.text();
+      if (!text) {
+        throw new Error('Empty response from server');
+      }
+
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError);
+        throw new Error('Invalid response format from server');
+      }
+
+      if (data.success) {
         toast({
           title: "Message sent successfully!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
+          description: data.message || "Thank you for reaching out. I'll get back to you soon.",
           variant: "default",
         });
         setFormData({ name: '', email: '', message: '' });
@@ -47,9 +88,22 @@ const ContactSection: React.FC<ContactSectionProps> = ({ darkMode }) => {
       }
     } catch (error) {
       console.error('Error sending message:', error);
+      
+      let errorMessage = "Please try again later or reach out directly via email: mss9430@nyu.edu";
+      
+      if (error instanceof Error) {
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          errorMessage = "Cannot connect to server. Please contact directly via email: mss9430@nyu.edu";
+        } else if (error.message.includes('JSON')) {
+          errorMessage = "Server error. Please contact directly via email: mss9430@nyu.edu";
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
       toast({
         title: "Failed to send message",
-        description: error instanceof Error ? error.message : "Please try again later or reach out directly via email.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

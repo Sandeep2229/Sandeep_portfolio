@@ -10,27 +10,47 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ darkMode }) => {
   const experiences = [
     {
       company: 'RaisingHealth',
-      role: 'Data Analyst Intern',
-      period: '2025 - Present',
-      description: 'Developed data pipelines and analytics dashboards for healthcare insights, improving decision-making processes by 40%.',
+      role: 'Data Analyst',
+      period: 'Jun 2025',
+      location: 'Brooklyn, NY (Hybrid)',
+      achievements: [
+        'Built structured AppSheet data models to track health services across programs, improving data consistency by 95%',
+        'Standardized raw community member data into clean, relational datasets, making information 90% more accessible',
+        'Designed user-friendly AppSheet workflows for recording sessions and updating participant details with 93% accuracy',
+        'Worked with program leads to turn operational needs into AppSheet features, creating tools 92% aligned with daily use',
+      ],
     },
     {
-      company: 'Excelr Solutions',
+      company: 'ExcelR Solutions',
       role: 'Data Scientist',
-      period: '2024',
-      description: 'Developed and deployed predictive models for stock price forecasting (LSTM, ARIMA) and fake news classification (NLP with n-gram and sentiment analysis), achieving a 22% reduction in forecasting error and 95% classification accuracy. Leveraged EDA and interactive Streamlit dashboards to uncover market trends, enhance model interpretability, and deliver a user-friendly experience.',
+      period: 'Aug 2025',
+      location: 'Hyderabad, India',
+      achievements: [
+        'Developed and fine-tuned stock price forecasting models for Reliance Industries using LSTM and ARIMA, reducing forecasting error by 22% and performing detailed EDA to uncover meaningful market trends',
+        'Built an NLP-based Fake vs. Real News classifier using n-gram analysis and sentiment methods, achieving 95% classification accuracy on validation data',
+        'Deployed the full solution through Streamlit for real-time user interaction and designed intuitive data visualizations to enhance model interpretability and overall user experience',
+      ],
     },
     {
-      company: 'National University of Singapore',
+      company: 'National University Of Singapore (NUS)',
       role: 'Research Intern',
-      period: '2023',
-      description: 'Conducted research on AI applications in healthcare, published findings in peer-reviewed conferences.',
+      period: 'Dec 2022',
+      location: 'Singapore',
+      achievements: [
+        'Developed CNN models (ResNet, VGG) for fracture detection on MURA dataset, improving classification accuracy by 15%',
+        'Deployed the model in a user-facing application for X-ray technicians, cutting down manual diagnostic time by 40%',
+        'Collaborated with 5+ faculty and medical professionals enhancing diagnostic reliability by 15%, reducing inference time by 30%',
+      ],
     },
     {
-      company: 'Hewlett Packard Enterprise',
-      role: 'Academic Intern',
-      period: '2023',
-      description: 'Built scalable cloud solutions using Kubernetes and Docker, optimized system performance by 35%.',
+      company: 'Hewlett Packard Enterprise (HPE)',
+      role: 'Software Engineer',
+      period: 'Jan 2022',
+      location: 'Singapore',
+      achievements: [
+        'Acquired comprehensive knowledge of data analytics concepts and their real-world applications, successfully deploying deep learning and machine learning models on Microsoft Azure, improving model deployment efficiency by 20%',
+        'Led a small-scale project applying Spark Analytics to a complex dataset, enhancing data processing insights by 35%',
+      ],
     },
   ];
 
@@ -85,8 +105,20 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ darkMode }) => {
                   <h3 className="text-xl font-semibold">{exp.role}</h3>
                   <span className="text-sm opacity-60 font-medium">{exp.period}</span>
                 </div>
-                <h4 className="text-lg font-medium mb-3 opacity-80">{exp.company}</h4>
-                <p className="opacity-70 leading-relaxed">{exp.description}</p>
+                <div className="flex flex-col md:flex-row md:items-center md:gap-2 mb-3">
+                  <h4 className="text-lg font-medium opacity-80">{exp.company}</h4>
+                  {exp.location && (
+                    <span className="text-sm opacity-60">• {exp.location}</span>
+                  )}
+                </div>
+                <ul className="space-y-2 mt-3">
+                  {exp.achievements.map((achievement, idx) => (
+                    <li key={idx} className="opacity-70 leading-relaxed text-sm flex items-start">
+                      <span className="mr-2 mt-1.5">•</span>
+                      <span>{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}

@@ -16,19 +16,19 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Profile Image Section */}
           <motion.div
-            className="relative flex justify-center lg:justify-end order-2 lg:order-1"
+            className="relative flex justify-center items-center lg:justify-end order-2 lg:order-1"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="relative">
+            <div className="relative flex items-center justify-center">
               {/* Animated background rings */}
               <motion.div
-                className="absolute inset-0 w-96 h-96 rounded-full bg-gradient-to-br from-blue-400/20 via-purple-500/20 to-cyan-400/20 backdrop-blur-sm"
+                className="absolute w-80 h-80 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-blue-400/20 via-purple-500/20 to-cyan-400/20 backdrop-blur-sm"
                 animate={{
                   rotate: [0, 360],
                   scale: [1, 1.05, 1],
@@ -39,7 +39,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
                 }}
               />
               <motion.div
-                className="absolute inset-4 rounded-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-md"
+                className="absolute w-72 h-72 md:w-88 md:h-88 rounded-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-md"
                 animate={{
                   rotate: [360, 0],
                 }}
@@ -52,14 +52,15 @@ const AboutSection: React.FC<AboutSectionProps> = ({ darkMode }) => {
               
               {/* Profile Image */}
               <motion.div
-                className="relative w-96 h-96 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl m-4"
+                className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl z-10"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               >
                 <img
                   src="/lovable-uploads/profilepic.png"
                   alt="Sai Sandeep Mamidala"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: 'center 30%' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </motion.div>
