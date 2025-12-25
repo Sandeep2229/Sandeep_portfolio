@@ -13,6 +13,15 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
   const { toast } = useToast();
   const projects = [
     {
+      title: 'Real Estate Value Prediction & Mispricing Detection',
+      description: 'Developed an ML pipeline for real estate valuation on 7,478 properties achieving 94.4% R² accuracy with Gradient Boosting. Engineered 27 features including neighborhood medians and property ratios reducing prediction MAPE to 4.9% on validation. Built K-Means clustering with 4 property segments enabling targeted mispricing detection of 50+ undervalued properties. Deployed model as REST API on Azure ML with Flask backend enabling real-time property valuation and confidence intervals.',
+      tech: ['Python', 'Machine Learning', 'Gradient Boosting', 'K-Means', 'Flask', 'Azure ML', 'REST API'],
+      github: 'https://github.com/Sandeep2229/Real-Estate-Value-Prediction-Mispricing-Detection',
+      demo: '#',
+      date: 'Dec 2025',
+      location: 'New York, United States',
+    },
+    {
       title: 'CIFAR-10 Image Classification with Custom ResNet',
       description: 'Developed a deep learning model for CIFAR-10 image classification with under 5M parameters and over 80% test accuracy. Designed a custom ResNet with progressive channel expansion, achieving 90.24% accuracy at just 2.76M parameters.',
       tech: ['Python', 'PyTorch', 'Deep Learning', 'CNN', 'ResNet'],
