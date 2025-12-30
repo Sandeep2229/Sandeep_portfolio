@@ -22,6 +22,15 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ darkMode }) => {
       location: 'New York, United States',
     },
     {
+      title: 'AI Course Assistant - RAG Chatbot',
+      description: 'Built a production-grade RAG chatbot using LangChain and OpenAI GPT-4 for context-aware Q&A with citation grounding. Implemented semantic search with ChromaDB vector store and text-embedding-3-small achieving 95%+ retrieval relevance. Engineered document pipeline supporting PDF/TXT ingestion with recursive chunking and 500-token overlap for coherence. Deployed on Streamlit Cloud with real-time streaming responses, multi-course filtering, and evidence-backed source citations.',
+      tech: ['Python', 'LangChain', 'OpenAI GPT-4', 'ChromaDB', 'RAG', 'NLP', 'Streamlit', 'Vector Search'],
+      github: '#',
+      demo: 'https://ai-course-assistant-sandeep.streamlit.app/',
+      date: 'Dec 2025',
+      location: 'New York, United States',
+    },
+    {
       title: 'CIFAR-10 Image Classification with Custom ResNet',
       description: 'Developed a deep learning model for CIFAR-10 image classification with under 5M parameters and over 80% test accuracy. Designed a custom ResNet with progressive channel expansion, achieving 90.24% accuracy at just 2.76M parameters.',
       tech: ['Python', 'PyTorch', 'Deep Learning', 'CNN', 'ResNet'],
