@@ -64,7 +64,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // If email is not configured, return success (for demo purposes)
+    // If email is not configured, return success with friendly message
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
       console.log('📧 Contact Form Submission (Email not configured):', {
         name,
@@ -73,7 +73,7 @@ export default async function handler(req, res) {
       });
       return res.status(200).json({ 
         success: true, 
-        message: 'Message received! (Email not configured - check Vercel logs)' 
+        message: "Message received! I'll get back to you soon." 
       });
     }
 
