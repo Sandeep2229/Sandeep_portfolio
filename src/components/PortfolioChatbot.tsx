@@ -65,9 +65,10 @@ const PortfolioChatbot: React.FC<PortfolioChatbotProps> = ({ darkMode }) => {
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
+    const text = inputValue.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputValue,
+      text,
       isUser: true,
       timestamp: new Date()
     };
@@ -76,18 +77,37 @@ const PortfolioChatbot: React.FC<PortfolioChatbotProps> = ({ darkMode }) => {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate AI thinking time
+    let reply = getAIResponse(text);
+
+    if (!import.meta.env.DEV) {
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text }),
+        });
+        const data = await res.json();
+        if (res.ok && data.message) {
+          reply = data.message;
+        } else if (data.fallback && data.message) {
+          reply = data.message;
+        }
+      } catch {
+        // keep reply from getAIResponse
+      }
+    }
+
+    const delay = import.meta.env.DEV ? 800 : 400;
     setTimeout(() => {
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: getAIResponse(inputValue),
+        text: reply,
         isUser: false,
         timestamp: new Date()
       };
-      
       setMessages(prev => [...prev, aiResponse]);
       setIsTyping(false);
-    }, 1500);
+    }, delay);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
