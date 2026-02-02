@@ -40,7 +40,7 @@ const PortfolioChatbot: React.FC<PortfolioChatbotProps> = ({ darkMode }) => {
     const lowerMessage = userMessage.toLowerCase();
     
     if (lowerMessage.includes('experience') || lowerMessage.includes('work')) {
-      return "Sandeep is currently a Data Analyst Intern at 6th Element Inc (Austin, TX). He has also worked at RaisingHealth as a Data Analyst, research at National University of Singapore, and an academic internship at Hewlett Packard Enterprise. He's worked on operational analytics, healthcare analytics, AI research, and cloud solutions.";
+      return "Sandeep is currently a Software Engineer (AI/ML) at 6th Element Inc (Austin, TX). He has architected high-performance microservices with Go and Java, led Salesforce implementations, integrated AI solutions, and achieved 95% test coverage. He has also worked at RaisingHealth, National University of Singapore, and Hewlett Packard Enterprise.";
     }
     
     if (lowerMessage.includes('project') || lowerMessage.includes('built')) {

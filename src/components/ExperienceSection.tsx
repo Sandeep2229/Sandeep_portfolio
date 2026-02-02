@@ -10,13 +10,14 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ darkMode }) => {
   const experiences = [
     {
       company: '6th Element Inc',
-      role: 'Data Analyst Intern',
+      role: 'Software Engineer (AI/ML)',
       period: 'Jan 2026 - Present',
-      location: 'Austin, TX (Hybrid)',
+      location: 'Austin, TX, USA',
       achievements: [
-        'Reviewing, analyzing, and designing operational analytics for programming',
-        'Supporting data system setup for programmatic and operational use',
-        'Ensuring compliance with data management, privacy, and security best practices',
+        'Architected high-performance microservices leveraging Go and Java, resulting in a 75% increase in application performance and a 40% decrease in latency, drastically improving operational efficiency',
+        'Spearheaded cross-functional teams in Agile methodologies to design and implement Salesforce applications, enhancing workflows and reducing onboarding time by 50%, while boosting user engagement by 45%',
+        'Integrated AI solutions into Salesforce through advanced problem-solving strategies, elevating customer engagement metrics by 35% and empowering data-driven decision-making',
+        'Executed rigorous unit and integration testing, achieving 95% code coverage and slashing post-deployment defects by 80%, significantly enhancing application stability and reliability',
       ],
     },
     {
