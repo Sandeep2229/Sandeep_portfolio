@@ -9,6 +9,17 @@ interface ExperienceSectionProps {
 const ExperienceSection: React.FC<ExperienceSectionProps> = ({ darkMode }) => {
   const experiences = [
     {
+      company: '6th Element Inc',
+      role: 'Data Analyst Intern',
+      period: 'Jan 2026 - Present',
+      location: 'Austin, TX (Hybrid)',
+      achievements: [
+        'Reviewing, analyzing, and designing operational analytics for programming',
+        'Supporting data system setup for programmatic and operational use',
+        'Ensuring compliance with data management, privacy, and security best practices',
+      ],
+    },
+    {
       company: 'RaisingHealth',
       role: 'Data Analyst',
       period: 'Jun 2025',

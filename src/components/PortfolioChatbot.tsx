@@ -40,7 +40,7 @@ const PortfolioChatbot: React.FC<PortfolioChatbotProps> = ({ darkMode }) => {
     const lowerMessage = userMessage.toLowerCase();
     
     if (lowerMessage.includes('experience') || lowerMessage.includes('work')) {
-      return "Sandeep has experience at RaisingHealth as a Data Analyst Intern, research at National University of Singapore, and an academic internship at Hewlett Packard Enterprise. He's worked on healthcare analytics, AI research, and cloud solutions.";
+      return "Sandeep is currently a Data Analyst Intern at 6th Element Inc (Austin, TX). He has also worked at RaisingHealth as a Data Analyst, research at National University of Singapore, and an academic internship at Hewlett Packard Enterprise. He's worked on operational analytics, healthcare analytics, AI research, and cloud solutions.";
     }
     
     if (lowerMessage.includes('project') || lowerMessage.includes('built')) {
